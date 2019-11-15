@@ -1052,7 +1052,7 @@ void GCS_MAVLINK::send_radio_in()
         receiver_rssi);        
 }
 
-void GCS_MAVLINK::send_raw_imu()
+/*void GCS_MAVLINK::send_raw_imu()
 {
     const AP_InertialSensor &ins = AP::ins();
     const Compass &compass = AP::compass();
@@ -1135,7 +1135,7 @@ void GCS_MAVLINK::send_raw_imu()
         mag.y,
         mag.z);        
 }
-
+*/
 // sub overrides this to send on-board temperature
 void GCS_MAVLINK::send_scaled_pressure3()
 {
