@@ -102,7 +102,6 @@ const AP_Scheduler::Task Plane::scheduler_tasks[] = {
 };
 
 constexpr int8_t Plane::_failsafe_priorities[5];
-
 void Plane::setup() 
 {
     // load the default values of variables listed in var_info[]
@@ -527,7 +526,7 @@ void Plane::handle_autodbf_mode(void)
         calc_throttle();
     }
 }
-
+bool jacksflag = true; //creat a boolean to make initializing baro calibrate loop only run once
 /*
   main flight mode dependent update code 
  */
@@ -742,7 +741,12 @@ void Plane::update_flight_mode(void)
         break;
     }
         
-    case INITIALISING:
+    case INITIALISING: {
+        if (jacksflag){ //run baro calibrate once when we flip into initializing
+            barometer.calibrate();
+            jacksflag = false;
+        }
+    }
         // handled elsewhere
         break;
     }
