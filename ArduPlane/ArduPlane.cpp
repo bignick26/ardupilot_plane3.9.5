@@ -471,7 +471,7 @@ void Plane::handle_autodbf_mode(void)
     if (mission.state() != AP_Mission::MISSION_RUNNING) {
         // this could happen if AP_Landing::restart_landing_sequence() returns false which would only happen if:
         // restart_landing_sequence() is called when not executing a NAV_LAND or there is no previous nav point
-        set_mode(RTL, MODE_REASON_MISSION_END);
+        //set_mode(RTL, MODE_REASON_MISSION_END);
         gcs().send_text(MAV_SEVERITY_INFO, "Aircraft in auto without a running mission");
         return;
     }
@@ -503,8 +503,12 @@ void Plane::handle_autodbf_mode(void)
         calc_nav_pitch();
 
         //limit roll and pitch
-        if (nav_roll_cd < int32t(-500)){ nav_roll_cd = int32_t(-500)}  //-500 min roll
-        else if (nav_roll_cd > int32t(500)) {nav_roll_cd = int32_t(500)} //500 max roll
+        if (nav_roll_cd < int32t(-500)){ 
+            nav_roll_cd = int32_t(-500)
+        }  //-500 min roll
+        else if (nav_roll_cd > int32t(500)) {
+            nav_roll_cd = int32_t(500)
+        } //500 max roll
     } else {
         // we are doing normal AUTO flight, the special cases
         // are for takeoff and landing
@@ -760,7 +764,7 @@ void Plane::update_navigation()
             mission.update();
         }
         break;
-        
+
     case RTL:
         if (quadplane.available() && quadplane.rtl_mode == 1 &&
             (nav_controller->reached_loiter_target() ||

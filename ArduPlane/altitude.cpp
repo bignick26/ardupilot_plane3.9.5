@@ -102,6 +102,16 @@ void Plane::setup_glide_slope(void)
             reset_offset_altitude();
         }
         break;
+        
+    case AUTOdbf:
+        //copy from case AUTO:
+        if (adjusted_relative_altitude_cm() > 2000 || above_location_current(next_WP_loc)) {
+            set_offset_altitude_location(next_WP_loc);
+        } else {
+            reset_offset_altitude();
+        }
+        break;
+
     default:
         reset_offset_altitude();
         break;

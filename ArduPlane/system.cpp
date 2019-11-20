@@ -423,7 +423,17 @@ void Plane::set_mode(enum FlightMode mode, mode_reason_t reason)
         g2.soaring_controller.init_cruising();
         break;
 
-    case AUTOdbf:
+    case AUTOdbf: //may need to change more!
+        throttle_allows_nudging = false;
+        auto_throttle_mode = false;
+        auto_navigation_mode = true;
+        auto_state.vtol_mode = false;
+        next_WP_loc = prev_WP_loc = current_loc;
+        // start or resume the mission, based on MIS_AUTORESET
+        mission.start_or_resume();
+		
+        g2.soaring_controller.init_cruising();
+        break;
 
     case RTL:
         throttle_allows_nudging = true;
