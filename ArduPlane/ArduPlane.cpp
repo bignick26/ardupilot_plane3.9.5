@@ -515,7 +515,7 @@ void Plane::handle_autodbf_mode(void)
         }          
         else if (nav_pitch_cd > int32_t(-900)) {
             nav_pitch_cd = int32_t(-900); //500 max pitch
-            } 
+        } 
     } else {
         // we are doing normal AUTO flight, the special cases
         // are for takeoff and landing
