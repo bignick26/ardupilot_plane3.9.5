@@ -498,17 +498,24 @@ void Plane::handle_autodbf_mode(void)
         } else {
             calc_throttle();
         }
-    }else if (current_loc.alt < 300) { //if we are below 3m
+    }else if (current_loc.alt < int32_t(300)) { //if we are below 3m
         calc_nav_roll();
         calc_nav_pitch();
 
         //limit roll and pitch
-        if (nav_roll_cd < int32t(-500)){ 
-            nav_roll_cd = int32_t(-500)
-        }  //-500 min roll
-        else if (nav_roll_cd > int32t(500)) {
-            nav_roll_cd = int32_t(500)
-        } //500 max roll
+        if (nav_roll_cd < int32_t(-500)){ 
+            nav_roll_cd = int32_t(-500);  //-500 min roll
+        }  
+        else if (nav_roll_cd > int32_t(500)) {
+            nav_roll_cd = int32_t(500);  //500 max roll
+        } 
+    
+        if (nav_pitch_cd < int32_t(-1900)){
+            nav_pitch_cd = int32_t(-1900);  //-500 min pitch i think we need values -1400 since we put in a down pitch of -1400
+        }          
+        else if (nav_pitch_cd > int32_t(-900)) {
+            nav_pitch_cd = int32_t(-900); //500 max pitch
+            } 
     } else {
         // we are doing normal AUTO flight, the special cases
         // are for takeoff and landing
