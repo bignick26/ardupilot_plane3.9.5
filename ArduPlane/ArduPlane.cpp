@@ -498,6 +498,13 @@ void Plane::handle_autodbf_mode(void)
         } else {
             calc_throttle();
         }
+    }else if (current_loc.alt < 300) { //if we are below 3m
+        calc_nav_roll();
+        calc_nav_pitch();
+
+        //limit roll and pitch
+        if (nav_roll_cd < int32t(-500)){ nav_roll_cd = int32_t(-500)}  //-500 min roll
+        else if (nav_roll_cd > int32t(500)) {nav_roll_cd = int32_t(500)} //500 max roll
     } else {
         // we are doing normal AUTO flight, the special cases
         // are for takeoff and landing
