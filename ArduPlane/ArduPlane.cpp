@@ -497,7 +497,7 @@ void Plane::handle_autodbf_mode(void)
         } else {
             calc_throttle();
         }
-    }else if (current_loc.alt < int32_t(300)) { //if we are below 3m
+    } else if (current_loc.alt < int32_t(300)) { //if we are below 3m
         calc_nav_roll();
         calc_nav_pitch();
 
@@ -742,7 +742,7 @@ void Plane::update_flight_mode(void)
     }
         
     case INITIALISING: {
-        if (jacksflag){ //run baro calibrate once when we flip into initializing
+        if (jacksflag) { //run baro calibrate once when we flip into initializing
             barometer.calibrate();
             jacksflag = false;
         }
