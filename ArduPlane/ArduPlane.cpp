@@ -764,7 +764,7 @@ void Plane::update_flight_mode(void)
     }
         
     case INITIALISING: {
-        if (double modf(double(millis),10^4) == 0) {
+        if (modf(float(millis),float(10^4)) == 0) {
             barometer.calibrate();
         }
     }
