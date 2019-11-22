@@ -447,7 +447,32 @@ void Plane::handle_auto_mode(void)
         } else {
             calc_throttle();
         }
-    } else {
+    } else if (current_loc.alt < int32_t(300)) { //if we are below 3m
+        
+        SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, SERVO_MAX);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, SERVO_MAX);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, SERVO_MAX);
+        /*
+        calc_nav_roll();
+        calc_nav_pitch();
+        
+        //limit roll and pitch
+        if (nav_roll_cd < int32_t(-500)){ 
+            nav_roll_cd = int32_t(-500);  //-500 min roll
+        }  
+        else if (nav_roll_cd > int32_t(500)) {
+            nav_roll_cd = int32_t(500);  //500 max roll
+        } 
+    
+        if (nav_pitch_cd < int32_t(-1900)){
+            nav_pitch_cd = int32_t(-1900);  //-500 min pitch i think we need values -1400 since we put in a down pitch of -1400
+        }          
+        else if (nav_pitch_cd > int32_t(-900)) {
+            nav_pitch_cd = int32_t(-900); //500 max pitch
+            */
+        } 
+    
+     }else {
         // we are doing normal AUTO flight, the special cases
         // are for takeoff and landing
         if (nav_cmd_id != MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT) {
@@ -466,9 +491,9 @@ void Plane::handle_auto_mode(void)
 void Plane::handle_autodbf_mode(void)
 {
     uint16_t nav_cmd_id;
-        SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, SERVO_MAX);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, SERVO_MAX);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, SERVO_MAX);
+        //SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, SERVO_MAX);
+       // SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, SERVO_MAX);
+       // SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, SERVO_MAX);
     if (mission.state() != AP_Mission::MISSION_RUNNING) {
         // this could happen if AP_Landing::restart_landing_sequence() returns false which would only happen if:
         // restart_landing_sequence() is called when not executing a NAV_LAND or there is no previous nav point
@@ -745,8 +770,11 @@ void Plane::update_flight_mode(void)
         
     case INITIALISING: {
         if (jacksflag) { //run baro calibrate once when we flip into initializing
-            barometer.init();
-            barometer.calibrate();
+            //barometer.init();
+            //barometer.calibrate();
+            SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, SERVO_MAX);
+            SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, SERVO_MAX);
+            SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, SERVO_MAX);
             jacksflag = false;
         }
 
