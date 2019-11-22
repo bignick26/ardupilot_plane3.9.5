@@ -766,8 +766,6 @@ void Plane::update_flight_mode(void)
     case INITIALISING: {
         
             barometer.calibrate();
-        }
-
 
     }
         // handled elsewhere
