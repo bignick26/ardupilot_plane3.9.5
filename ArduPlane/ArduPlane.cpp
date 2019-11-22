@@ -449,9 +449,6 @@ void Plane::handle_auto_mode(void)
         }
     } else if (current_loc.alt < int32_t(300)) { //if we are below 3m
         
-        SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, 1900);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, 1900);
-        /*
         calc_nav_roll();
         calc_nav_pitch();
         
@@ -463,14 +460,14 @@ void Plane::handle_auto_mode(void)
             nav_roll_cd = int32_t(500);  //500 max roll
         } 
     
-        if (nav_pitch_cd < int32_t(-1900)){
-            nav_pitch_cd = int32_t(-1900);  //-500 min pitch i think we need values -1400 since we put in a down pitch of -1400
+        if (nav_pitch_cd < int32_t(1100)){
+            nav_pitch_cd = int32_t(1100);  //-300 min pitch i think we need values +1400 since we put in a down pitch of -1400
         }          
-        else if (nav_pitch_cd > int32_t(-900)) {
-            nav_pitch_cd = int32_t(-900); //500 max pitch
+        else if (nav_pitch_cd > int32_t(1900)) {
+            nav_pitch_cd = int32_t(1900); //500 max pitch
            
         } 
-            */
+            
      }else {
         // we are doing normal AUTO flight, the special cases
         // are for takeoff and landing
@@ -552,7 +549,6 @@ void Plane::handle_autodbf_mode(void)
         calc_throttle();
     }
 }
-bool jacksflag = true; //creat a boolean to make initializing baro calibrate loop only run once
 /*
   main flight mode dependent update code 
  */
@@ -768,12 +764,8 @@ void Plane::update_flight_mode(void)
     }
         
     case INITIALISING: {
-        if (jacksflag) { //run baro calibrate once when we flip into initializing
-            //barometer.init();
-            //barometer.calibrate();
-            SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, 1900);
-            SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, 1900);
-            jacksflag = false;
+        
+            barometer.calibrate();
         }
 
 
