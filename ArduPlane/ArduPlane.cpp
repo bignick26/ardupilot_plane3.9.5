@@ -466,7 +466,9 @@ void Plane::handle_auto_mode(void)
 void Plane::handle_autodbf_mode(void)
 {
     uint16_t nav_cmd_id;
-
+        SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, SERVO_MAX);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, SERVO_MAX);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, SERVO_MAX);
     if (mission.state() != AP_Mission::MISSION_RUNNING) {
         // this could happen if AP_Landing::restart_landing_sequence() returns false which would only happen if:
         // restart_landing_sequence() is called when not executing a NAV_LAND or there is no previous nav point
@@ -743,9 +745,12 @@ void Plane::update_flight_mode(void)
         
     case INITIALISING: {
         if (jacksflag) { //run baro calibrate once when we flip into initializing
+            barometer.init();
             barometer.calibrate();
             jacksflag = false;
         }
+
+
     }
         // handled elsewhere
         break;
