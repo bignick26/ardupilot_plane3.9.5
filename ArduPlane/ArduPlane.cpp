@@ -449,9 +449,8 @@ void Plane::handle_auto_mode(void)
         }
     } else if (current_loc.alt < int32_t(300)) { //if we are below 3m
         
-        SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, SERVO_MAX);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, SERVO_MAX);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, SERVO_MAX);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, 1900);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, 1900);
         /*
         calc_nav_roll();
         calc_nav_pitch();
@@ -772,9 +771,8 @@ void Plane::update_flight_mode(void)
         if (jacksflag) { //run baro calibrate once when we flip into initializing
             //barometer.init();
             //barometer.calibrate();
-            SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, SERVO_MAX);
-            SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, SERVO_MAX);
-            SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, SERVO_MAX);
+            SRV_Channels::set_output_scaled(SRV_Channel::k_aileron, 1900);
+            SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, 1900);
             jacksflag = false;
         }
 
