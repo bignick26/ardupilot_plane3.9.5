@@ -474,7 +474,8 @@ void Plane::handle_auto_mode(void)
         calc_nav_pitch();
         calc_throttle();
         if (nav_pitch_cd > int32_t(-800)){
-            nav_pitch_cd = int32_t(-800);  //  max pitch of 8 degrees 
+            nav_pitch_cd = int32_t(-800);  //  max pitch of 8 degrees
+        }
     }
 }
 //Copy this for us! ^
