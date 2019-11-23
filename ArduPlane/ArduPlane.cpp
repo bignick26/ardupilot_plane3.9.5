@@ -763,11 +763,7 @@ void Plane::update_flight_mode(void)
         break;
     }
         
-    case INITIALISING: {
-        if (millis() % 10^4 == 0) {
-            barometer.calibrate();
-        }
-    }
+    case INITIALISING:    
         // handled elsewhere
         break;
     }
