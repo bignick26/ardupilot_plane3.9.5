@@ -453,19 +453,15 @@ void Plane::handle_auto_mode(void)
         calc_nav_pitch();
         
         //limit roll and pitch
-        if (nav_roll_cd < int32_t(-500)){ 
+       /* if (nav_roll_cd < int32_t(-500)){ 
             nav_roll_cd = int32_t(-500);  //-500 min roll
         }  
         else if (nav_roll_cd > int32_t(500)) {
             nav_roll_cd = int32_t(500);  //500 max roll
         } 
-    
-        if (nav_pitch_cd < int32_t(1100)){
-            nav_pitch_cd = int32_t(1100);  //-300 min pitch i think we need values +1400 since we put in a down pitch of -1400
-        }          
-        else if (nav_pitch_cd > int32_t(1900)) {
-            nav_pitch_cd = int32_t(1900); //500 max pitch
-           
+        */
+        if (nav_pitch_cd < int32_t(500)){
+            nav_pitch_cd = int32_t(500);  //  min pitch of 5 degrees        
         } 
             
      }else {
@@ -477,6 +473,8 @@ void Plane::handle_auto_mode(void)
         calc_nav_roll();
         calc_nav_pitch();
         calc_throttle();
+        if (nav_pitch_cd > int32_t(-800)){
+            nav_pitch_cd = int32_t(-800);  //  max pitch of 8 degrees 
     }
 }
 //Copy this for us! ^
