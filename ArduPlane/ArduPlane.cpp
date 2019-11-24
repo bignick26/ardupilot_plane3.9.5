@@ -460,8 +460,8 @@ void Plane::handle_auto_mode(void)
             nav_roll_cd = int32_t(500);  //500 max roll
         } 
         */
-        if (nav_pitch_cd < int32_t(1000)){
-            nav_pitch_cd = int32_t(1000);  //  min pitch of 10 degrees        
+        if (nav_pitch_cd < int32_t(500)){
+            nav_pitch_cd = int32_t(500);  //  min pitch of 5 degrees        
         } 
             
      }else {
@@ -473,8 +473,8 @@ void Plane::handle_auto_mode(void)
         calc_nav_roll();
         calc_nav_pitch();
         calc_throttle();
-        if (nav_pitch_cd > int32_t(-800)){
-            nav_pitch_cd = int32_t(-800);  //  max pitch of 8 degrees
+        if (nav_pitch_cd > int32_t(-400)){
+            nav_pitch_cd = int32_t(-400);  //  max pitch of -4 degrees
         }
     }
 }
