@@ -447,7 +447,7 @@ void Plane::handle_auto_mode(void)
         } else {
             calc_throttle();
         }
-    } else if (current_loc.alt < float(200)) { //if we are below 3m
+    } else if (current_loc.alt < float(400)) { //if we are below 4m
         
         calc_nav_roll();
         calc_nav_pitch();
