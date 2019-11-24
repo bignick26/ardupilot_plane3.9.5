@@ -447,7 +447,7 @@ void Plane::handle_auto_mode(void)
         } else {
             calc_throttle();
         }
-    } else if (current_loc.alt < int32_t(300)) { //if we are below 3m
+    } else if (current_loc.alt < int32_t(200)) { //if we are below 3m
         
         calc_nav_roll();
         calc_nav_pitch();
@@ -473,8 +473,8 @@ void Plane::handle_auto_mode(void)
         calc_nav_roll();
         calc_nav_pitch();
         calc_throttle();
-        if (nav_pitch_cd > int32_t(-1200)){
-            nav_pitch_cd = int32_t(-1200);  //  max pitch of -12 degrees
+        if (nav_pitch_cd > int32_t(-800)){
+            nav_pitch_cd = int32_t(-800);  //  max pitch of -8 degrees
         }
     }
 }
