@@ -460,8 +460,8 @@ void Plane::handle_auto_mode(void)
             nav_roll_cd = int32_t(500);  //500 max roll
         } 
         */
-        if (nav_pitch_cd < int16_t(0)){
-            nav_pitch_cd = int16_t(0);  //  min pitch of 0 degrees        
+        if (nav_pitch_cd < int16_t(1000)){
+            nav_pitch_cd = int16_t(1000);  //  min pitch of 10 degrees        
         } 
             
      }else {
