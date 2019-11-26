@@ -519,7 +519,7 @@ void Plane::handle_autodbf_mode(void)
         } else {
             calc_throttle();
         }
-    } else if (current_loc.alt < int32_t(300)) { //if we are below 3m
+    } else if (adjusted_relative_altitude_cm() < 300) { //if we are below 3m
         calc_nav_roll();
         calc_nav_pitch();
 
