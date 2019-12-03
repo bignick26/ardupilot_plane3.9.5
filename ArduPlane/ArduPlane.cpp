@@ -447,7 +447,7 @@ void Plane::handle_auto_mode(void)
         } else {
             calc_throttle();
         }
-    } else if (current_loc.alt < float(400)) { //if we are below 4m
+    } else if (adjusted_relative_altitude_cm() < 400) { //if we are below 4m
         
         calc_nav_roll();
         calc_nav_pitch();
@@ -462,9 +462,21 @@ void Plane::handle_auto_mode(void)
         */
         if (nav_pitch_cd < int16_t(500)){
             nav_pitch_cd = int16_t(500);  //  min pitch of 5 degrees        
-        } 
-            
-     }else {
+        }
+     
+    } else if (adjusted_relative_altitude_cm() > 400) { //if we are above 4m    Im adding this to make sure the altitude logic works    
+
+        calc_nav_roll();
+        calc_nav_pitch();
+
+
+        if (nav_pitch_cd > int16_t(-400)){
+            nav_pitch_cd = int16_t(-400);  //  max pitch of -4 degrees
+        }
+
+
+    
+    }else {
         // we are doing normal AUTO flight, the special cases
         // are for takeoff and landing
         if (nav_cmd_id != MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT) {
