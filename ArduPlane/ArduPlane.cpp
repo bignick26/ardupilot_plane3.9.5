@@ -145,7 +145,8 @@ void Plane::ahrs_update()
 
     //update drop sensor analog read
     dropMagValue = dropMagSource->voltage_latest();
-    gcs().send_text(MAV_SEVERITY_INFO, "Analog In : %f", dropMagValue);
+    //add a counter like old flight mode output - if ((AP_HAL::micros() - timer) > 2000 * 1000UL) { //run every .5 Hz?
+    gcs().send_text(MAV_SEVERITY_INFO, "Analog In : %f", dropMagValue); //--read between 0 and 3!
 
 
     if (should_log(MASK_LOG_IMU)) {
