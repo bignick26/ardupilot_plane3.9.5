@@ -145,6 +145,8 @@ void Plane::ahrs_update()
 
     //update drop sensor analog read
     dropMagValue = dropMagSource->voltage_latest();
+    gcs().send_text(MAV_SEVERITY_INFO, "Analog In : %f", dropMagValue);
+
 
     if (should_log(MASK_LOG_IMU)) {
         DataFlash.Log_Write_IMU();
