@@ -289,6 +289,10 @@ private:
     // RSSI
     AP_RSSI rssi;
 
+    //Analog Drop Sensor
+    float dropMagValue;
+    AP_HAL::AnalogSource* dropMagSource;
+
 #if OSD_ENABLED == ENABLED
     AP_OSD osd;
 #endif

@@ -113,6 +113,7 @@ void Plane::setup()
 
     // initialise the main loop scheduler
     scheduler.init(&scheduler_tasks[0], ARRAY_SIZE(scheduler_tasks), MASK_LOG_PM);
+    dropMagSource = hal.analogin->channel(12);
 }
 
 void Plane::loop()
@@ -141,6 +142,9 @@ void Plane::ahrs_update()
 #endif
 
     ahrs.update();
+
+    //update drop sensor analog read
+    dropMagValue = dropMagSource->voltage_latest();
 
     if (should_log(MASK_LOG_IMU)) {
         DataFlash.Log_Write_IMU();
