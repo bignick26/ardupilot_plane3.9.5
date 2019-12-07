@@ -459,8 +459,8 @@ void Plane::handle_auto_mode(void)
         calc_nav_roll();
         calc_nav_pitch();
         
-        if (nav_pitch_cd < int16_t(2600)){
-            nav_pitch_cd = int16_t(2600);  //  min pitch of 12 degrees  add 1400 since 14 degree downpitch      
+        if (nav_pitch_cd < int16_t(3000)){
+            nav_pitch_cd = int16_t(3000);  //  min pitch of 16 degrees  add 1400 since 14 degree downpitch      
         }
      
     } else if (adjusted_relative_altitude_cm() > 200) { //if we are above 2m    Im adding this to make sure the altitude logic works    
