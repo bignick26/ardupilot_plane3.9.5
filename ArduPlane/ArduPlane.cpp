@@ -113,7 +113,7 @@ void Plane::setup()
 
     // initialise the main loop scheduler
     scheduler.init(&scheduler_tasks[0], ARRAY_SIZE(scheduler_tasks), MASK_LOG_PM);
-   // dropMagSource = hal.analogin->channel(12);
+    dropMagSource = hal.analogin->channel(12);
 }
 
 void Plane::loop()
@@ -144,9 +144,9 @@ void Plane::ahrs_update()
     ahrs.update();
 
     //update drop sensor analog read
-    // dropMagValue = dropMagSource->voltage_latest();
+    dropMagValue = dropMagSource->voltage_latest();
     //add a counter like old flight mode output - if ((AP_HAL::micros() - timer) > 2000 * 1000UL) { //run every .5 Hz?
-    // gcs().send_text(MAV_SEVERITY_INFO, "Analog In : %f", dropMagValue); //--read between 0 and 3!
+    gcs().send_text(MAV_SEVERITY_INFO, "Analog In : %f", dropMagValue); //--read between 0 and 3!
 
 
     if (should_log(MASK_LOG_IMU)) {
@@ -454,7 +454,7 @@ void Plane::handle_auto_mode(void)
         } else {
             calc_throttle();
         }
-    } else if (adjusted_relative_altitude_cm() < 300) { //if we are below 2m
+    } else if (adjusted_relative_altitude_cm() < 400) { //if we are below 4m
         
         calc_nav_roll();
         calc_nav_pitch();
@@ -463,7 +463,7 @@ void Plane::handle_auto_mode(void)
             nav_pitch_cd = int16_t(2400);  //  min pitch of 10 degrees  add 1400 since 14 degree downpitch      
         }
      
-    } else if (adjusted_relative_altitude_cm() > 300) { //if we are above 2m    Im adding this to make sure the altitude logic works    
+    } else if (adjusted_relative_altitude_cm() > 400) { //if we are above 4m    Im adding this to make sure the altitude logic works    
 
         calc_nav_roll();
         calc_nav_pitch();
