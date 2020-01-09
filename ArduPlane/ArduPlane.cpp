@@ -456,7 +456,7 @@ void Plane::handle_auto_mode(void)
         } else {
             calc_throttle();
         }
-    } else if (get_distance(Plane::current_loc, Plane::next_WP_loc); < 3) { //if we are within 3m of WP
+    } else if (get_distance(Plane::current_loc, Plane::next_WP_loc) < 3) { //if we are within 3m of WP
         
         calc_nav_roll();
         calc_nav_pitch();
